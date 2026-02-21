@@ -19,23 +19,33 @@ fbq('track', 'PageView');
 </script>
 
 <style>
-/* আপনার আগের সব CSS অপরিবর্তিত রাখা হয়েছে */
 body {margin:0;font-family:Arial,Helvetica,sans-serif;background:#f0f8f5;color:#222;line-height:1.6;}
 .wrapper {max-width:900px;margin:auto;background:white;padding-bottom:50px;}
-.header {background:#2e7d32;color:white;text-align:center;padding:40px 20px; position: relative;}
-.header img.logo {width:100px; height:100px; border-radius:50%; object-fit:cover; display:block; margin:0 auto 20px;}
-.header h1 {font-size:36px;font-weight:bold;margin:0;}
+.header {background:#2e7d32;color:white;text-align:center;padding:40px 20px;}
+.header img.logo {width:100px;height:100px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 20px;}
+.header h1 {font-size:32px;margin:0;}
 .section {padding:40px 20px;}
+.slider {position:relative;width:100%;height:400px;overflow:hidden;margin-bottom:30px;}
+.slide {position:absolute;width:100%;height:100%;opacity:0;transition:opacity 1s;}
+.slide img {width:100%;height:100%;object-fit:cover;border-radius:10px;}
+.active {opacity:1;}
 .price-box {background:#e8f5e9;border:2px dashed #2e7d32;padding:25px;text-align:center;margin:20px 0;border-radius:10px;}
 .old-price {text-decoration:line-through;color:gray;font-size:20px;}
-.new-price {color:#1b5e20;font-size:28px;font-weight:bold;margin-top:10px;}
-.btn {display:block;width:60%;margin:20px auto;background:#2e7d32;color:white;text-align:center;padding:20px;font-size:22px;text-decoration:none;border-radius:10px;transition:0.3s;}
-.btn:hover {background:#66bb6a;transform:scale(1.05);}
-.order-box {background:#e8f5e9;padding:40px 20px;border:1px solid #a5d6a7;border-radius:10px;margin-top:50px;}
+.new-price {color:#1b5e20;font-size:28px;font-weight:bold;}
+.btn {display:block;width:60%;margin:20px auto;background:#2e7d32;color:white;text-align:center;padding:18px;font-size:20px;text-decoration:none;border-radius:10px;}
+.features li {margin:10px 0;font-size:18px;}
+.product-section {margin-bottom:40px;}
+.product-section img {width:100%;border-radius:10px;margin-bottom:15px;}
+.video-section iframe {width:100%;height:450px;border:none;border-radius:10px;}
+.order-box {background:#e8f5e9;padding:40px 20px;border-radius:10px;margin-top:50px;}
 input, select {width:100%;padding:15px;margin:10px 0;border:1px solid #ccc;border-radius:8px;font-size:16px;}
 button {width:100%;padding:18px;background:#388e3c;color:white;border:none;font-size:20px;border-radius:10px;cursor:pointer;}
 .footer {background:#1b5e20;color:white;text-align:center;padding:25px;font-size:14px;}
 .success-message {display:none;background:#d4edda;color:#155724;padding:15px;margin-top:10px;border-radius:5px;font-size:16px;}
+.float-buttons{position:fixed;bottom:25px;right:25px;display:flex;flex-direction:column;gap:15px;z-index:999;}
+.float-buttons a{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#25d366;}
+.float-buttons a.messenger{background:#0084ff;}
+.float-buttons img{width:24px;height:24px;}
 </style>
 </head>
 <body>
@@ -43,15 +53,25 @@ button {width:100%;padding:18px;background:#388e3c;color:white;border:none;font-
 <div class="wrapper">
 
 <div class="header">
+<img class="logo" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCKGQ-_PqJ7DiBAEVvxt4cWozC0eEx3tyS6iCwErDkbLB7DCoBJVdqo7u5by2_5T_FOWQANgrPQF72FbbWClRaovOda1dKjgUQY4ExomHz5VGApg_H3ozbJZx8po1C3kT4vpeM_BJ7upGpmEiIkmVD2VPwC91OHaXnm8XczYn8ijCQSkicJ2PVrarbFG4/s225/download%20(2).jfif">
 <h1>প্রিমিয়াম হারবাল ঔষধ – স্বাস্থ্য ও শক্তি বৃদ্ধি</h1>
+</div>
+
+<div class="slider">
+<div class="slide active"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEexcfHyBg3SZdfUj4FBYNDCE1f9dnWJN7ra8PyF3x7P9AcTraxf-rWCQk4CQAsU5H2EvcByNxXxZAxsttY_VZWs5AMwkcdsluLwPT35k0y5IXpm4SwAwPcoORwnSD9-hcs0kBbbNGOqbDFfecd7Ocb4ueroAQcDvNGB8aXf3jc-BqRMiVRYfHrfFRRpk/s225/images%20(2).jfif"></div>
+<div class="slide"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEexcfHyBg3SZdfUj4FBYNDCE1f9dnWJN7ra8PyF3x7P9AcTraxf-rWCQk4CQAsU5H2EvcByNxXxZAxsttY_VZWs5AMwkcdsluLwPT35k0y5IXpm4SwAwPcoORwnSD9-hcs0kBbbNGOqbDFfecd7Ocb4ueroAQcDvNGB8aXf3jc-BqRMiVRYfHrfFRRpk/s225/images%20(2).jfif"></div>
+</div>
+
+<div class="section price-box">
+<p class="old-price">আগের মূল্য: ৳ ৯৫০</p>
+<p class="new-price">অফার মূল্য: ৳ ৭৯০</p>
+<a href="#order" class="btn">এখনই অর্ডার করুন</a>
 </div>
 
 <div class="section order-box" id="order">
 <h2>অর্ডার ফর্ম</h2>
 
-<!-- ✅ SilentForms Integration -->
 <form id="orderForm">
-
 <input type="hidden" name="access_key" value="3c44d641148da9d23c9afa6be2e4ceb037320be71c43c4ca37b04f578f4c6aee">
 
 <input type="text" name="name" placeholder="আপনার নাম লিখুন" required>
@@ -60,8 +80,8 @@ button {width:100%;padding:18px;background:#388e3c;color:white;border:none;font-
 
 <select name="package" required>
 <option value="">প্যাকেজ নির্বাচন করুন</option>
-<option>১ প্যাক - ৳৭৯০ / ৫০ প্যাকেট</option>
-<option>২ প্যাক - ৳১৫০০ / ১০০ প্যাকেট</option>
+<option>১ প্যাক - ৳৭৯০</option>
+<option>২ প্যাক - ৳১৫০০</option>
 </select>
 
 <button type="submit">অর্ডার কনফার্ম করুন</button>
@@ -78,23 +98,42 @@ button {width:100%;padding:18px;background:#388e3c;color:white;border:none;font-
 
 </div>
 
+<div class="float-buttons">
+<a href="YOUR_WHATSAPP_LINK_HERE" target="_blank">
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
+</a>
+<a href="YOUR_MESSENGER_LINK_HERE" class="messenger" target="_blank">
+<img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg">
+</a>
+</div>
+
 <script>
-document.getElementById("orderForm").addEventListener("submit", function(e){
+// Slider
+let slides=document.querySelectorAll(".slide");
+let index=0;
+setInterval(()=>{
+slides[index].classList.remove("active");
+index=(index+1)%slides.length;
+slides[index].classList.add("active");
+},4000);
+
+// SilentForms Submit
+document.getElementById("orderForm").addEventListener("submit",function(e){
 e.preventDefault();
+let formData=new FormData(this);
 
-var formData = new FormData(this);
-
-fetch("https://api.silentforms.com/submit", {
-method: "POST",
-body: formData
+fetch("https://api.silentforms.com/submit",{
+method:"POST",
+body:formData
 })
-.then(response => response.json())
-.then(data => {
-document.getElementById("successMsg").style.display = "block";
-fbq('track', 'Lead');
+.then(res=>res.json())
+.then(data=>{
+document.getElementById("successMsg").style.display="block";
+fbq('track','Lead');
+this.reset();
 })
-.catch(error => {
-alert("সাবমিট করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+.catch(err=>{
+alert("সাবমিট সমস্যা হয়েছে");
 });
 });
 </script>
