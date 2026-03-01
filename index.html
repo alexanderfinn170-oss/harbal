@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Women Chat Room – Guest Preview</title>
+<title>Women Chat Room – Guest Access</title>
 
-<meta name="description" content="Join our women chat community preview. Guest users can explore sample conversations and create a free account to unlock unlimited messaging.">
+<meta name="description" content="Join our women chat community. Chat as guest and explore social conversations focused on friendship and relationships.">
 
 <style>
 body{margin:0;font-family:Arial;background:#f5f5f5;}
 header{background:#ff4d6d;color:#fff;padding:15px;display:flex;justify-content:space-between;align-items:center;font-weight:bold;}
+.notice{background:#fff0f3;padding:6px 15px;font-size:12px;color:#555;}
 .menu-btn{cursor:pointer;font-size:22px;}
 .dropdown{display:none;position:absolute;top:60px;left:10px;background:#fff;box-shadow:0 5px 15px rgba(0,0,0,0.2);border-radius:8px;width:220px;padding:10px;z-index:1000;}
 .dropdown a{display:block;padding:8px;text-decoration:none;color:#333;font-size:14px;}
@@ -34,8 +35,12 @@ button{padding:10px 15px;border:none;border-radius:20px;background:#ff4d6d;color
 
 <header>
 <span class="menu-btn" onclick="toggleMenu()">☰</span>
-Women Chat Room – Guest Preview
+Women Social Chat Community
 </header>
+
+<div class="notice">
+You are chatting as <strong>Guest</strong> in community preview mode.
+</div>
 
 <div class="dropdown" id="menu">
 <a href="#">How To Continue</a>
@@ -53,7 +58,7 @@ Women Chat Room – Guest Preview
 <div class="lock-box" id="lockBox">
 <div class="lock-content">
 <span class="close-btn" onclick="goBack()">✖</span>
-<p><strong>Guest Preview Mode</strong></p>
+<p><strong>Guest Access Limit</strong></p>
 <p>Create a free account to unlock unlimited messaging.</p>
 <a href="https://your-affiliate-link.com">
 <button>Create Free Account</button>
@@ -62,98 +67,59 @@ Women Chat Room – Guest Preview
 </div>
 
 <div class="seo-small">
-<strong>Women Social & Relationship Chat</strong><br>
-This platform allows guest users to preview sample conversations focused on friendship, relationships, and meaningful connections.
+<strong>Women Relationship & Friendship Chat</strong><br>
+Connect through meaningful conversations focused on friendship, life experiences, travel stories and relationships.
 </div>
 
 <script>
 const chat=document.getElementById("chat");
 const lockBox=document.getElementById("lockBox");
 const inputArea=document.getElementById("inputArea");
+
 let profiles=[];
 let userMsgCount=0;
 
+/* Female Name List */
+const femaleNames=[
+"Emma","Olivia","Sophia","Ava","Isabella","Mia","Charlotte","Amelia","Harper","Evelyn",
+"Abigail","Emily","Ella","Elizabeth","Camila","Luna","Sofia","Avery","Mila","Aria",
+"Scarlett","Penelope","Layla","Chloe","Victoria","Madison","Grace","Nora","Riley","Zoey"
+];
+
+/* Generate 300 profiles */
 for(let i=0;i<300;i++){
-let randomId=Math.floor(10000+Math.random()*90000);
+let name=femaleNames[Math.floor(Math.random()*femaleNames.length)];
 profiles.push({
-name:"Guest"+randomId,
+name:name+" "+Math.floor(Math.random()*100),
 img:"https://randomuser.me/api/portraits/women/"+(i%90)+".jpg"
 });
 }
 
-/* SAFE ROMANTIC MESSAGE POOL (70+) */
+/* Safe Romantic Message Pool */
 const messagePool=[
-"I enjoy meeting new people and having meaningful conversations.",
-"Friendship is always the first step to something beautiful.",
-"I believe emotional connection matters more than anything.",
-"Sometimes a simple chat can brighten your day.",
-"I love talking about dreams and future goals.",
-"Good communication builds strong relationships.",
-"I appreciate honest and kind-hearted people.",
-"I think friendship sometimes turns into love naturally.",
-"I enjoy peaceful evening conversations.",
-"Life feels better when you can share it with someone.",
-"I like discussing books, travel and life experiences.",
-"A deep conversation is more attractive than anything.",
-"I value loyalty and respect in any relationship.",
-"I enjoy connecting with positive minded people.",
-"Travel stories always make conversations interesting.",
-"I think every strong relationship starts with friendship.",
-"I love listening to different life experiences.",
-"A good friend is hard to find.",
-"Sharing small daily stories makes bonding stronger.",
-"I believe trust is the base of every connection.",
-"I enjoy talking about future plans and ambitions.",
-"Simple conversations can create strong bonds.",
-"I like people who communicate openly.",
-"Respect and understanding are very important to me.",
-"I enjoy learning about different cultures.",
-"I think emotional maturity matters in relationships.",
+"I enjoy meaningful conversations.",
+"Friendship is the first step to something beautiful.",
+"I value honesty and respect.",
+"I love peaceful evening chats.",
+"Travel stories always inspire me.",
+"I believe emotional connection matters.",
+"I enjoy connecting with kind people.",
+"Life feels better when shared.",
+"I appreciate thoughtful discussions.",
+"Trust builds strong bonds.",
+"I like positive conversations.",
+"Sharing dreams makes bonding deeper.",
 "Kindness is very attractive.",
-"I appreciate supportive friends.",
-"I enjoy late night thoughtful chats.",
-"Honesty makes everything easier.",
-"I like meaningful conversations over small talk.",
-"Friendship makes life beautiful.",
-"I enjoy positive vibes.",
-"Love grows with understanding.",
-"Traveling with someone special is unforgettable.",
-"I believe in building connections slowly.",
-"I like discussing life lessons.",
-"Communication solves most problems.",
-"I enjoy calm and respectful chats.",
-"Sharing goals creates deeper bonds.",
-"I value emotional intelligence.",
-"Listening is an underrated skill.",
-"I like people who are genuine.",
-"Trust takes time but it's worth it.",
-"I believe love should feel peaceful.",
-"I enjoy talking about hobbies and interests.",
-"Life is better when shared.",
-"I appreciate thoughtful people.",
-"I like discussing dreams.",
-"I enjoy deep conversations about life.",
-"Friendship builds strong foundations.",
-"I value emotional support.",
-"I like meaningful connections.",
-"I believe patience strengthens relationships.",
-"I enjoy discussing life journeys.",
-"Kind conversations make my day.",
-"I like positive discussions.",
-"Strong bonds grow over time.",
-"I enjoy respectful communication.",
-"I appreciate sincere people.",
-"I believe love grows from friendship.",
+"I value maturity in relationships.",
+"I enjoy learning about different cultures.",
+"Friendship can turn into something special.",
+"I like discussing life goals.",
+"Respect is very important to me.",
 "I enjoy calm and friendly chats.",
-"Sharing experiences connects hearts.",
-"I value maturity in conversations.",
-"I enjoy talking about life goals.",
-"Respect makes everything stronger.",
-"I like friendly and thoughtful discussions.",
-"Building connection slowly feels real.",
-"I enjoy meeting kind people."
+"Communication strengthens relationships."
 ];
 
+/* Preload 100 messages */
 for(let i=0;i<100;i++){
 let profile=profiles[Math.floor(Math.random()*profiles.length)];
 let text=messagePool[Math.floor(Math.random()*messagePool.length)];
@@ -180,20 +146,25 @@ chat.appendChild(msgDiv);
 function sendMessage(){
 let input=document.getElementById("msgInput");
 if(input.value.trim()==="") return;
-addMessage("You","https://cdn-icons-png.flaticon.com/512/149/149071.png",input.value);
+
+addMessage("Guest","https://cdn-icons-png.flaticon.com/512/149/149071.png",input.value);
+
 input.value="";
 userMsgCount++;
+
 if(userMsgCount>=3){
 inputArea.style.display="none";
 lockBox.style.display="flex";
 return;
 }
+
 setTimeout(()=>{
 let profile=profiles[Math.floor(Math.random()*profiles.length)];
 let text=messagePool[Math.floor(Math.random()*messagePool.length)];
 addMessage(profile.name,profile.img,text);
 chat.scrollTop=chat.scrollHeight;
 },1000);
+
 chat.scrollTop=chat.scrollHeight;
 }
 
