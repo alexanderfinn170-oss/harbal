@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Women Social Chat Community</title>
+<title>Women Social Chat Community | Free Online Chat Room</title>
+
+<meta name="description" content="Join Women Social Chat Community. Connect, make friends, enjoy safe romantic and friendly conversations online. Free guest chat available.">
 
 <style>
 body{
@@ -12,6 +14,7 @@ font-family:Arial, sans-serif;
 background:#f2f4f8;
 }
 
+/* HEADER */
 .header{
 display:flex;
 justify-content:space-between;
@@ -20,6 +23,7 @@ padding:12px 15px;
 background:#ff4d6d;
 color:white;
 font-weight:bold;
+position:relative;
 }
 
 .brand{
@@ -31,6 +35,29 @@ font-size:22px;
 cursor:pointer;
 }
 
+.dropdown{
+display:none;
+position:absolute;
+right:10px;
+top:45px;
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,0.2);
+border-radius:6px;
+overflow:hidden;
+z-index:1000;
+}
+
+.dropdown div{
+padding:10px 15px;
+cursor:pointer;
+font-size:14px;
+}
+
+.dropdown div:hover{
+background:#f1f1f1;
+}
+
+/* CHAT */
 .chat-box{
 height:75vh;
 overflow-y:auto;
@@ -71,6 +98,7 @@ font-size:11px;
 margin-left:6px;
 }
 
+/* INPUT */
 .input-area{
 display:flex;
 padding:10px;
@@ -94,13 +122,59 @@ border-radius:20px;
 margin-left:5px;
 cursor:pointer;
 }
+
+/* POPUP */
+.popup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+justify-content:center;
+align-items:center;
+z-index:2000;
+}
+
+.popup-content{
+background:white;
+padding:20px;
+border-radius:10px;
+width:90%;
+max-width:320px;
+text-align:center;
+}
+
+.popup-content h3{
+margin-top:0;
+}
+
+.popup-content button{
+width:100%;
+margin-top:10px;
+}
+
+/* SEO SMALL */
+.seo{
+padding:15px;
+font-size:13px;
+background:#fafafa;
+color:#555;
+}
 </style>
 </head>
 <body>
 
 <div class="header">
 <div class="brand">Women Social Chat Community</div>
-<div class="menu">⋮</div>
+<div class="menu" onclick="toggleMenu()">⋮</div>
+
+<div class="dropdown" id="dropdown">
+<div>About</div>
+<div>Privacy Policy</div>
+<div>Contact</div>
+</div>
 </div>
 
 <div class="chat-box" id="chatBox"></div>
@@ -110,137 +184,45 @@ cursor:pointer;
 <button onclick="sendMessage()">Send</button>
 </div>
 
+<!-- POPUP -->
+<div class="popup" id="accountPopup">
+<div class="popup-content">
+<h3>Create Free Account</h3>
+<p>Register now to continue chatting with our community.</p>
+<button onclick="closePopup()">Continue as Guest</button>
+<button>Create Free Account</button>
+</div>
+</div>
+
+<!-- SEO SECTION -->
+<div class="seo">
+<h2>Free Women Social Chat Room</h2>
+<p>Join our online women social chat community to connect, talk, and build friendly relationships. This platform allows guest users to explore conversations before creating a free account. Safe, simple, and easy to use chat experience.</p>
+</div>
+
 <script>
 
-// 100 European & American Names
-const names = [
-"Emma","Olivia","Sophia","Isabella","Charlotte","Amelia","Mia","Harper","Evelyn","Abigail",
-"Emily","Elizabeth","Sofia","Avery","Ella","Scarlett","Grace","Chloe","Victoria","Riley",
-"Lily","Aria","Zoey","Nora","Hannah","Luna","Layla","Aurora","Penelope","Savannah",
-"Brooklyn","Bella","Claire","Skylar","Lucy","Paisley","Everly","Anna","Caroline","Nova",
-"Madison","Hailey","Aubrey","Kinsley","Stella","Maya","Elena","Leah","Sarah","Violet",
-"Audrey","Hazel","Genesis","Adeline","Eliza","Samantha","Allison","Willow","Lucy","Naomi",
-"Eliana","Juliana","Gabriella","Valentina","Lydia","Madelyn","Julia","Delilah","Ariana","Kaylee",
-"Camila","Natalie","Ivy","Sadie","Piper","Ruby","Serenity","Autumn","Nevaeh","Cora",
-"Alice","Hailey","Quinn","Aaliyah","Kennedy","Sarah","Eva","Emilia","Clara","Vivian",
-"Reagan","Madeline","Josephine","Brielle","Arya","Lilah","Melanie","Jade","Maria","Athena"
-];
+const names=["Emma","Olivia","Sophia","Isabella","Charlotte","Amelia","Mia","Harper","Evelyn","Abigail"];
 
 let profiles=[];
-for(let i=0;i<100;i++){
+for(let i=0;i<10;i++){
 profiles.push({
 name:names[i],
-img:`https://randomuser.me/api/portraits/women/${i%99}.jpg`
+img:`https://randomuser.me/api/portraits/women/${i}.jpg`
 });
 }
 
-// 100 Connected Message Pool
-const messagePool = [
-"Hi Emma! Where are you from?",
-"I'm from New York 😊 What about you?",
-"Oh nice! I'm from London.",
-"London is beautiful! Have you visited Paris?",
-"Yes! Paris was amazing last summer.",
-"I always wanted to go there.",
-"You should! The cafes are lovely.",
-"I love coffee talks with friends ☕",
-"Same here! Especially on rainy days.",
-"Rainy days feel romantic sometimes.",
-"Do you like traveling solo?",
-"Sometimes, but I prefer going with friends.",
-"True! Traveling with friends is more fun.",
-"Have you ever visited Italy?",
-"Yes! Rome was unforgettable.",
-"I love Italian food so much!",
-"Pizza and pasta are my favorites.",
-"Same here 😂",
-"Do you enjoy beach vacations?",
-"Yes, especially in Spain!",
-"Spain beaches are stunning.",
-"I love sunset views there.",
-"Sunsets make me feel peaceful.",
-"Me too, especially by the ocean.",
-"Do you enjoy reading books?",
-"Yes! Romantic novels mostly.",
-"I love those too!",
-"Who is your favorite author?",
-"I like Jane Austen classics.",
-"Classic love stories are timeless.",
-"Absolutely agree!",
-"Do you believe in true love?",
-"Yes, but it needs trust.",
-"Trust is everything in a relationship.",
-"Exactly! Without trust nothing works.",
-"Are you married?",
-"No, but someday maybe 😊",
-"I hope you find someone kind.",
-"Thank you! That means a lot.",
-"Friendship like this is special.",
-"Yes, I enjoy chatting here.",
-"Same here, feels positive.",
-"What do you do for fun?",
-"I like painting and music.",
-"Wow that's creative!",
-"What about you?",
-"I enjoy photography.",
-"That's amazing!",
-"Have you traveled recently?",
-"Yes, I visited California.",
-"I love California beaches!",
-"They are breathtaking.",
-"Do you like hiking?",
-"Yes in the mountains.",
-"I prefer beach over mountains.",
-"Both are nice in different ways.",
-"True!",
-"Do you enjoy cooking?",
-"Yes, Italian dishes mostly.",
-"Sounds delicious!",
-"What’s your favorite dessert?",
-"Cheesecake 😍",
-"I love chocolate cake!",
-"Chocolate is life 😂",
-"Absolutely!",
-"Do you have siblings?",
-"Yes, one sister.",
-"I have two brothers.",
-"Family time is important.",
-"Very important.",
-"What’s your dream destination?",
-"Switzerland!",
-"Oh snowy mountains!",
-"Yes I love snow.",
-"I prefer warm weather.",
-"Warm beaches are perfect.",
-"True!",
-"Do you like long drives?",
-"Yes at night.",
-"Night drives feel peaceful.",
-"With good music.",
-"Exactly!",
-"What music do you like?",
-"Soft pop.",
-"I enjoy jazz.",
-"Nice choice!",
-"Music connects people.",
-"Yes it does.",
-"Do you believe in destiny?",
-"Sometimes I do.",
-"I believe hard work matters more.",
-"True as well.",
-"Life is a mix of both.",
-"Agreed.",
-"I'm glad we connected here.",
-"Me too!",
-"This chat feels nice.",
-"Yes, positive vibes only.",
-"Let’s stay friends.",
-"Of course!",
-"Good night everyone 🌙",
-"Good night! Talk tomorrow 😊"
+const messagePool=[
+"Hi everyone!",
+"Hello! How are you?",
+"I'm good 😊",
+"Where are you from?",
+"I'm from New York.",
+"Nice to meet you!"
 ];
 
 let msgIndex=0;
+let userMsgCount=0;
 
 function addMessage(profile,text){
 const chatBox=document.getElementById("chatBox");
@@ -258,9 +240,8 @@ chatBox.scrollTop=chatBox.scrollHeight;
 }
 
 function autoReply(){
-addMessage(profiles[msgIndex%100],messagePool[msgIndex]);
+addMessage(profiles[msgIndex%profiles.length],messagePool[msgIndex%messagePool.length]);
 msgIndex++;
-if(msgIndex>=100){msgIndex=0;}
 }
 
 function sendMessage(){
@@ -268,15 +249,28 @@ const input=document.getElementById("userInput");
 if(input.value.trim()!==""){
 addMessage({name:"Guest",img:"https://randomuser.me/api/portraits/lego/1.jpg"},input.value);
 input.value="";
+userMsgCount++;
+
+if(userMsgCount===3){
+document.getElementById("accountPopup").style.display="flex";
+}
 }
 }
 
-// preload first 100
-for(let i=0;i<100;i++){
+function closePopup(){
+document.getElementById("accountPopup").style.display="none";
+}
+
+function toggleMenu(){
+const menu=document.getElementById("dropdown");
+menu.style.display=menu.style.display==="block"?"none":"block";
+}
+
+for(let i=0;i<6;i++){
 autoReply();
 }
 
-setInterval(autoReply,3000);
+setInterval(autoReply,4000);
 
 </script>
 
