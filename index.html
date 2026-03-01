@@ -2,27 +2,27 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Women Chat Room – Guest Access</title>
-<meta name="description" content="Join our women chat room guest access mode. Preview live conversations and create a free account to unlock unlimited messaging.">
-<meta name="keywords" content="women chat room, online chat for women, live women chat, guest chat room">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Women Chat Room – Guest Preview</title>
+
+<meta name="description" content="Join our women chat community preview. Guest users can explore sample conversations and create a free account to unlock unlimited messaging.">
+<meta name="keywords" content="women chat room, online women community, guest chat preview">
 
 <style>
 body{
 margin:0;
 font-family:Arial, sans-serif;
-background:#f4f4f4;
+background:#f5f5f5;
 }
 
 header{
 background:#ff4d6d;
 color:#fff;
 padding:15px;
-font-size:18px;
-font-weight:bold;
 display:flex;
 justify-content:space-between;
 align-items:center;
+font-weight:bold;
 }
 
 .menu-btn{
@@ -36,10 +36,11 @@ position:absolute;
 top:60px;
 left:10px;
 background:#fff;
-box-shadow:0 0 10px rgba(0,0,0,0.2);
-border-radius:6px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+border-radius:8px;
+width:220px;
 padding:10px;
-width:200px;
+z-index:1000;
 }
 
 .dropdown a{
@@ -51,21 +52,34 @@ font-size:14px;
 }
 
 .dropdown a:hover{
-background:#f2f2f2;
+background:#f1f1f1;
 }
 
-.chat-box{
-height:400px;
+.chat-container{
+height:70vh;
+background:#fff;
 overflow-y:auto;
 padding:15px;
-background:#fff;
 }
 
 .message{
+display:flex;
+align-items:flex-start;
+margin-bottom:10px;
+}
+
+.avatar{
+width:40px;
+height:40px;
+border-radius:50%;
+margin-right:8px;
+}
+
+.msg-box{
 background:#ffe5ec;
 padding:8px 12px;
-margin:6px 0;
-border-radius:15px;
+border-radius:12px;
+font-size:14px;
 max-width:70%;
 }
 
@@ -93,26 +107,26 @@ margin-left:5px;
 cursor:pointer;
 }
 
-.locked{
+.lock-box{
+display:none;
 text-align:center;
 padding:20px;
 background:#fff0f3;
-display:none;
 }
 
-.seo-section{
-padding:30px;
+.seo-small{
+padding:15px;
+font-size:12px;
+color:#666;
 background:#fff;
-margin-top:20px;
 }
 </style>
 </head>
-
 <body>
 
 <header>
 <span class="menu-btn" onclick="toggleMenu()">☰</span>
-Women Chat Room – Guest Access
+Women Chat Room – Guest Preview
 </header>
 
 <div class="dropdown" id="menu">
@@ -121,16 +135,15 @@ Women Chat Room – Guest Access
 <a href="https://your-affiliate-link.com">Create Free Account</a>
 </div>
 
-<div class="chat-box" id="chatBox">
-</div>
+<div class="chat-container" id="chat"></div>
 
-<div class="input-area">
-<input type="text" id="msgInput" placeholder="Type a message as Guest..." />
+<div class="input-area" id="inputArea">
+<input type="text" id="msgInput" placeholder="Chat as Guest..." />
 <button onclick="sendMessage()">Send</button>
 </div>
 
-<div class="locked" id="lockedBox">
-<p>You are chatting as Guest.</p>
+<div class="lock-box" id="lockBox">
+<p>You are using Guest Preview Mode.</p>
 <p>Create a free account to unlock unlimited messaging.</p>
 <a href="https://your-affiliate-link.com">
 <button>Create Free Account</button>
@@ -138,85 +151,105 @@ Women Chat Room – Guest Access
 <button onclick="goBack()">Back</button>
 </div>
 
-<div class="seo-section">
-<h2>Online Women Chat Room – Safe & Friendly Community</h2>
-<p>
-Our women chat room allows guests to preview real conversations and explore the platform before registration. 
-Users can create a free account to unlock unlimited messaging features and connect with active members.
-</p>
-
-<h3>Why Join Our Chat Platform?</h3>
-<ul>
-<li>Live chat environment</li>
-<li>Safe guest access mode</li>
-<li>Easy free account registration</li>
-<li>Active online members</li>
-</ul>
-
-<p>
-This platform is designed for entertainment and community interaction. 
-Guest access provides limited messaging preview before full registration.
-</p>
+<div class="seo-small">
+<strong>Women Chat Community</strong><br>
+This platform allows guest users to preview sample conversations in a women-focused social chat community. 
+Create a free account to unlock full messaging features and connect with members.
 </div>
 
 <script>
+const chat = document.getElementById("chat");
+const lockBox = document.getElementById("lockBox");
+const inputArea = document.getElementById("inputArea");
 
-let chatBox = document.getElementById("chatBox");
-let lockedBox = document.getElementById("lockedBox");
-let msgCount = 0;
+let profiles = [];
+let messagePool = [];
+let userMsgCount = 0;
 
-function toggleMenu(){
-let menu = document.getElementById("menu");
-menu.style.display = menu.style.display === "block" ? "none" : "block";
+// Generate 300 random profiles
+for(let i=0;i<300;i++){
+let randomId = Math.floor(10000 + Math.random()*90000);
+profiles.push({
+name:"Guest"+randomId,
+img:"https://randomuser.me/api/portraits/women/"+(i%90)+".jpg"
+});
 }
 
-// preload 50 messages
-for(let i=1;i<=50;i++){
-let msg = document.createElement("div");
-msg.className="message";
-msg.innerText="User"+i+": Hello, welcome to the chat!";
-chatBox.appendChild(msg);
+// Message Pool (life, family, travel, love topics)
+messagePool = [
+"I love spending time with my family on weekends.",
+"My travel experience in Thailand was unforgettable.",
+"Balancing married life and career is challenging.",
+"My best friend always supports me.",
+"I recently started a small business from home.",
+"Traveling alone helped me grow as a person.",
+"Being a mom changed my life completely.",
+"My honeymoon trip was magical.",
+"I enjoy talking about relationships and life goals.",
+"Friendship is the best therapy.",
+"Family gatherings are my favorite moments.",
+"I believe communication is key in love.",
+"Traveling to new cities excites me.",
+"My childhood memories still inspire me.",
+"I love peaceful village life."
+];
+
+// preload 100 messages
+for(let i=0;i<100;i++){
+let profile = profiles[Math.floor(Math.random()*profiles.length)];
+let text = messagePool[Math.floor(Math.random()*messagePool.length)];
+addMessage(profile.name, profile.img, text);
 }
 
-chatBox.scrollTop = chatBox.scrollHeight;
+chat.scrollTop = chat.scrollHeight;
+
+function addMessage(name,img,text){
+let msgDiv = document.createElement("div");
+msgDiv.className="message";
+
+msgDiv.innerHTML=`
+<img src="${img}" class="avatar">
+<div class="msg-box"><strong>${name}:</strong> ${text}</div>
+`;
+
+chat.appendChild(msgDiv);
+}
 
 function sendMessage(){
 let input = document.getElementById("msgInput");
 if(input.value.trim()==="") return;
 
-let msg = document.createElement("div");
-msg.className="message";
-msg.style.background="#d8f3dc";
-msg.innerText="You: "+input.value;
-chatBox.appendChild(msg);
+addMessage("You","https://cdn-icons-png.flaticon.com/512/149/149071.png",input.value);
 
 input.value="";
-msgCount++;
+userMsgCount++;
 
-if(msgCount>=3){
-document.querySelector(".input-area").style.display="none";
-lockedBox.style.display="block";
+if(userMsgCount>=3){
+inputArea.style.display="none";
+lockBox.style.display="block";
 return;
 }
 
-// auto reply
 setTimeout(()=>{
-let reply = document.createElement("div");
-reply.className="message";
-reply.innerText="Member: That's interesting 😊";
-chatBox.appendChild(reply);
-chatBox.scrollTop = chatBox.scrollHeight;
+let profile = profiles[Math.floor(Math.random()*profiles.length)];
+let text = messagePool[Math.floor(Math.random()*messagePool.length)];
+addMessage(profile.name,profile.img,text);
+chat.scrollTop = chat.scrollHeight;
 },1000);
 
-chatBox.scrollTop = chatBox.scrollHeight;
+chat.scrollTop = chat.scrollHeight;
 }
 
 function goBack(){
-lockedBox.style.display="none";
-document.querySelector(".input-area").style.display="flex";
-msgCount=0;
+lockBox.style.display="none";
+inputArea.style.display="flex";
+userMsgCount=0;
 }
 
+function toggleMenu(){
+let menu=document.getElementById("menu");
+menu.style.display=menu.style.display==="block"?"none":"block";
+}
 </script>
 
 </body>
