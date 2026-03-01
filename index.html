@@ -3,181 +3,281 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Women Chat Room – Guest Access</title>
-
-<meta name="description" content="Join our women chat community. Chat as guest and explore social conversations focused on friendship and relationships.">
+<title>Women Social Chat Community</title>
 
 <style>
-body{margin:0;font-family:Arial;background:#f5f5f5;}
-header{background:#ff4d6d;color:#fff;padding:15px;display:flex;justify-content:space-between;align-items:center;font-weight:bold;}
-.notice{background:#fff0f3;padding:6px 15px;font-size:12px;color:#555;}
-.menu-btn{cursor:pointer;font-size:22px;}
-.dropdown{display:none;position:absolute;top:60px;left:10px;background:#fff;box-shadow:0 5px 15px rgba(0,0,0,0.2);border-radius:8px;width:220px;padding:10px;z-index:1000;}
-.dropdown a{display:block;padding:8px;text-decoration:none;color:#333;font-size:14px;}
-.dropdown a:hover{background:#f1f1f1;}
-.chat-container{height:70vh;background:#fff;overflow-y:auto;padding:15px;}
-.message{display:flex;align-items:flex-start;margin-bottom:10px;}
-.avatar{width:40px;height:40px;border-radius:50%;margin-right:8px;}
-.msg-box{background:#ffe5ec;padding:8px 12px;border-radius:12px;font-size:14px;max-width:70%;}
-.name-line{font-size:13px;font-weight:bold;}
-.live-badge{background:#28a745;color:#fff;font-size:10px;padding:2px 6px;border-radius:10px;margin-left:5px;}
-.live-dot{width:8px;height:8px;background:#28a745;border-radius:50%;display:inline-block;margin-right:4px;}
-.input-area{display:flex;padding:10px;background:#fff;border-top:1px solid #ddd;}
-input{flex:1;padding:10px;border-radius:20px;border:1px solid #ccc;}
-button{padding:10px 15px;border:none;border-radius:20px;background:#ff4d6d;color:#fff;margin-left:5px;cursor:pointer;}
-.lock-box{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;}
-.lock-content{background:#fff;padding:25px;border-radius:12px;width:300px;text-align:center;position:relative;}
-.close-btn{position:absolute;top:10px;right:15px;font-size:18px;cursor:pointer;color:#999;}
-.seo-small{padding:15px;font-size:12px;color:#666;background:#fff;}
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#f2f4f8;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 15px;
+background:#ff4d6d;
+color:white;
+font-weight:bold;
+}
+
+.brand{
+font-size:18px;
+}
+
+.menu{
+font-size:22px;
+cursor:pointer;
+}
+
+.chat-box{
+height:75vh;
+overflow-y:auto;
+padding:10px;
+background:white;
+}
+
+.message{
+display:flex;
+margin-bottom:10px;
+}
+
+.message img{
+width:42px;
+height:42px;
+border-radius:50%;
+margin-right:8px;
+}
+
+.bubble{
+background:#f1f1f1;
+padding:8px 12px;
+border-radius:12px;
+font-size:14px;
+max-width:230px;
+}
+
+.name{
+font-weight:bold;
+font-size:13px;
+display:flex;
+align-items:center;
+}
+
+.online{
+color:green;
+font-size:11px;
+margin-left:6px;
+}
+
+.input-area{
+display:flex;
+padding:10px;
+background:white;
+border-top:1px solid #ddd;
+}
+
+input{
+flex:1;
+padding:8px;
+border-radius:20px;
+border:1px solid #ccc;
+}
+
+button{
+padding:8px 15px;
+border:none;
+background:#ff4d6d;
+color:white;
+border-radius:20px;
+margin-left:5px;
+cursor:pointer;
+}
 </style>
 </head>
 <body>
 
-<header>
-<span class="menu-btn" onclick="toggleMenu()">☰</span>
-Women Social Chat Community
-</header>
-
-<div class="notice">
-You are chatting as <strong>Guest</strong> in community preview mode.
+<div class="header">
+<div class="brand">Women Social Chat Community</div>
+<div class="menu">⋮</div>
 </div>
 
-<div class="dropdown" id="menu">
-<a href="#">How To Continue</a>
-<a href="#">Platform Features</a>
-<a href="https://your-affiliate-link.com">Create Free Account</a>
-</div>
+<div class="chat-box" id="chatBox"></div>
 
-<div class="chat-container" id="chat"></div>
-
-<div class="input-area" id="inputArea">
-<input type="text" id="msgInput" placeholder="Chat as Guest..." />
+<div class="input-area">
+<input type="text" id="userInput" placeholder="Type a message...">
 <button onclick="sendMessage()">Send</button>
 </div>
 
-<div class="lock-box" id="lockBox">
-<div class="lock-content">
-<span class="close-btn" onclick="goBack()">✖</span>
-<p><strong>Guest Access Limit</strong></p>
-<p>Create a free account to unlock unlimited messaging.</p>
-<a href="https://your-affiliate-link.com">
-<button>Create Free Account</button>
-</a>
-</div>
-</div>
-
-<div class="seo-small">
-<strong>Women Relationship & Friendship Chat</strong><br>
-Connect through meaningful conversations focused on friendship, life experiences, travel stories and relationships.
-</div>
-
 <script>
-const chat=document.getElementById("chat");
-const lockBox=document.getElementById("lockBox");
-const inputArea=document.getElementById("inputArea");
 
-let profiles=[];
-let userMsgCount=0;
-
-/* Female Name List */
-const femaleNames=[
-"Emma","Olivia","Sophia","Ava","Isabella","Mia","Charlotte","Amelia","Harper","Evelyn",
-"Abigail","Emily","Ella","Elizabeth","Camila","Luna","Sofia","Avery","Mila","Aria",
-"Scarlett","Penelope","Layla","Chloe","Victoria","Madison","Grace","Nora","Riley","Zoey"
+// 100 European & American Names
+const names = [
+"Emma","Olivia","Sophia","Isabella","Charlotte","Amelia","Mia","Harper","Evelyn","Abigail",
+"Emily","Elizabeth","Sofia","Avery","Ella","Scarlett","Grace","Chloe","Victoria","Riley",
+"Lily","Aria","Zoey","Nora","Hannah","Luna","Layla","Aurora","Penelope","Savannah",
+"Brooklyn","Bella","Claire","Skylar","Lucy","Paisley","Everly","Anna","Caroline","Nova",
+"Madison","Hailey","Aubrey","Kinsley","Stella","Maya","Elena","Leah","Sarah","Violet",
+"Audrey","Hazel","Genesis","Adeline","Eliza","Samantha","Allison","Willow","Lucy","Naomi",
+"Eliana","Juliana","Gabriella","Valentina","Lydia","Madelyn","Julia","Delilah","Ariana","Kaylee",
+"Camila","Natalie","Ivy","Sadie","Piper","Ruby","Serenity","Autumn","Nevaeh","Cora",
+"Alice","Hailey","Quinn","Aaliyah","Kennedy","Sarah","Eva","Emilia","Clara","Vivian",
+"Reagan","Madeline","Josephine","Brielle","Arya","Lilah","Melanie","Jade","Maria","Athena"
 ];
 
-/* Generate 300 profiles */
-for(let i=0;i<300;i++){
-let name=femaleNames[Math.floor(Math.random()*femaleNames.length)];
+let profiles=[];
+for(let i=0;i<100;i++){
 profiles.push({
-name:name+" "+Math.floor(Math.random()*100),
-img:"https://randomuser.me/api/portraits/women/"+(i%90)+".jpg"
+name:names[i],
+img:`https://randomuser.me/api/portraits/women/${i%99}.jpg`
 });
 }
 
-/* Safe Romantic Message Pool */
-const messagePool=[
-"I enjoy meaningful conversations.",
-"Friendship is the first step to something beautiful.",
-"I value honesty and respect.",
-"I love peaceful evening chats.",
-"Travel stories always inspire me.",
-"I believe emotional connection matters.",
-"I enjoy connecting with kind people.",
-"Life feels better when shared.",
-"I appreciate thoughtful discussions.",
-"Trust builds strong bonds.",
-"I like positive conversations.",
-"Sharing dreams makes bonding deeper.",
-"Kindness is very attractive.",
-"I value maturity in relationships.",
-"I enjoy learning about different cultures.",
-"Friendship can turn into something special.",
-"I like discussing life goals.",
-"Respect is very important to me.",
-"I enjoy calm and friendly chats.",
-"Communication strengthens relationships."
+// 100 Connected Message Pool
+const messagePool = [
+"Hi Emma! Where are you from?",
+"I'm from New York 😊 What about you?",
+"Oh nice! I'm from London.",
+"London is beautiful! Have you visited Paris?",
+"Yes! Paris was amazing last summer.",
+"I always wanted to go there.",
+"You should! The cafes are lovely.",
+"I love coffee talks with friends ☕",
+"Same here! Especially on rainy days.",
+"Rainy days feel romantic sometimes.",
+"Do you like traveling solo?",
+"Sometimes, but I prefer going with friends.",
+"True! Traveling with friends is more fun.",
+"Have you ever visited Italy?",
+"Yes! Rome was unforgettable.",
+"I love Italian food so much!",
+"Pizza and pasta are my favorites.",
+"Same here 😂",
+"Do you enjoy beach vacations?",
+"Yes, especially in Spain!",
+"Spain beaches are stunning.",
+"I love sunset views there.",
+"Sunsets make me feel peaceful.",
+"Me too, especially by the ocean.",
+"Do you enjoy reading books?",
+"Yes! Romantic novels mostly.",
+"I love those too!",
+"Who is your favorite author?",
+"I like Jane Austen classics.",
+"Classic love stories are timeless.",
+"Absolutely agree!",
+"Do you believe in true love?",
+"Yes, but it needs trust.",
+"Trust is everything in a relationship.",
+"Exactly! Without trust nothing works.",
+"Are you married?",
+"No, but someday maybe 😊",
+"I hope you find someone kind.",
+"Thank you! That means a lot.",
+"Friendship like this is special.",
+"Yes, I enjoy chatting here.",
+"Same here, feels positive.",
+"What do you do for fun?",
+"I like painting and music.",
+"Wow that's creative!",
+"What about you?",
+"I enjoy photography.",
+"That's amazing!",
+"Have you traveled recently?",
+"Yes, I visited California.",
+"I love California beaches!",
+"They are breathtaking.",
+"Do you like hiking?",
+"Yes in the mountains.",
+"I prefer beach over mountains.",
+"Both are nice in different ways.",
+"True!",
+"Do you enjoy cooking?",
+"Yes, Italian dishes mostly.",
+"Sounds delicious!",
+"What’s your favorite dessert?",
+"Cheesecake 😍",
+"I love chocolate cake!",
+"Chocolate is life 😂",
+"Absolutely!",
+"Do you have siblings?",
+"Yes, one sister.",
+"I have two brothers.",
+"Family time is important.",
+"Very important.",
+"What’s your dream destination?",
+"Switzerland!",
+"Oh snowy mountains!",
+"Yes I love snow.",
+"I prefer warm weather.",
+"Warm beaches are perfect.",
+"True!",
+"Do you like long drives?",
+"Yes at night.",
+"Night drives feel peaceful.",
+"With good music.",
+"Exactly!",
+"What music do you like?",
+"Soft pop.",
+"I enjoy jazz.",
+"Nice choice!",
+"Music connects people.",
+"Yes it does.",
+"Do you believe in destiny?",
+"Sometimes I do.",
+"I believe hard work matters more.",
+"True as well.",
+"Life is a mix of both.",
+"Agreed.",
+"I'm glad we connected here.",
+"Me too!",
+"This chat feels nice.",
+"Yes, positive vibes only.",
+"Let’s stay friends.",
+"Of course!",
+"Good night everyone 🌙",
+"Good night! Talk tomorrow 😊"
 ];
 
-/* Preload 100 messages */
-for(let i=0;i<100;i++){
-let profile=profiles[Math.floor(Math.random()*profiles.length)];
-let text=messagePool[Math.floor(Math.random()*messagePool.length)];
-addMessage(profile.name,profile.img,text);
+let msgIndex=0;
+
+function addMessage(profile,text){
+const chatBox=document.getElementById("chatBox");
+const msg=document.createElement("div");
+msg.className="message";
+msg.innerHTML=`
+<img src="${profile.img}">
+<div>
+<div class="name">${profile.name} <span class="online">● Online</span></div>
+<div class="bubble">${text}</div>
+</div>
+`;
+chatBox.appendChild(msg);
+chatBox.scrollTop=chatBox.scrollHeight;
 }
 
-chat.scrollTop=chat.scrollHeight;
-
-function addMessage(name,img,text){
-let msgDiv=document.createElement("div");
-msgDiv.className="message";
-msgDiv.innerHTML=`
-<img src="${img}" class="avatar">
-<div class="msg-box">
-<div class="name-line">
-<span class="live-dot"></span>${name}
-<span class="live-badge">LIVE</span>
-</div>
-${text}
-</div>`;
-chat.appendChild(msgDiv);
+function autoReply(){
+addMessage(profiles[msgIndex%100],messagePool[msgIndex]);
+msgIndex++;
+if(msgIndex>=100){msgIndex=0;}
 }
 
 function sendMessage(){
-let input=document.getElementById("msgInput");
-if(input.value.trim()==="") return;
-
-addMessage("Guest","https://cdn-icons-png.flaticon.com/512/149/149071.png",input.value);
-
+const input=document.getElementById("userInput");
+if(input.value.trim()!==""){
+addMessage({name:"Guest",img:"https://randomuser.me/api/portraits/lego/1.jpg"},input.value);
 input.value="";
-userMsgCount++;
-
-if(userMsgCount>=3){
-inputArea.style.display="none";
-lockBox.style.display="flex";
-return;
+}
 }
 
-setTimeout(()=>{
-let profile=profiles[Math.floor(Math.random()*profiles.length)];
-let text=messagePool[Math.floor(Math.random()*messagePool.length)];
-addMessage(profile.name,profile.img,text);
-chat.scrollTop=chat.scrollHeight;
-},1000);
-
-chat.scrollTop=chat.scrollHeight;
+// preload first 100
+for(let i=0;i<100;i++){
+autoReply();
 }
 
-function goBack(){
-lockBox.style.display="none";
-inputArea.style.display="flex";
-userMsgCount=0;
-}
+setInterval(autoReply,3000);
 
-function toggleMenu(){
-let menu=document.getElementById("menu");
-menu.style.display=menu.style.display==="block"?"none":"block";
-}
 </script>
 
 </body>
