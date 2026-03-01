@@ -1,240 +1,283 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Women Social Chat Community</title>
+
 <style>
-body{margin:0;font-family:Arial;background:#f5f5f5;}
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#f2f4f8;
+}
+
 .header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:10px 15px;
-background:#ff4da6;
-color:#fff;
+padding:12px 15px;
+background:#ff4d6d;
+color:white;
 font-weight:bold;
+}
+
+.brand{
 font-size:18px;
 }
-.menu{cursor:pointer;font-size:22px;}
-.dropdown{
-display:none;
-position:absolute;
-right:10px;
-top:50px;
-background:#fff;
-box-shadow:0 2px 8px rgba(0,0,0,.2);
-border-radius:6px;
-overflow:hidden;
-}
-.dropdown div{
-padding:10px 15px;
+
+.menu{
+font-size:22px;
 cursor:pointer;
 }
-.dropdown div:hover{background:#eee;}
+
 .chat-box{
-height:70vh;
+height:75vh;
 overflow-y:auto;
 padding:10px;
+background:white;
 }
-.msg{
-margin:5px 0;
+
+.message{
+display:flex;
+margin-bottom:10px;
+}
+
+.message img{
+width:42px;
+height:42px;
+border-radius:50%;
+margin-right:8px;
+}
+
+.bubble{
+background:#f1f1f1;
 padding:8px 12px;
-border-radius:15px;
-max-width:70%;
+border-radius:12px;
 font-size:14px;
+max-width:230px;
 }
-.left{background:#fff;}
-.right{background:#ffccdd;margin-left:auto;}
-.input-box{
+
+.name{
+font-weight:bold;
+font-size:13px;
+display:flex;
+align-items:center;
+}
+
+.online{
+color:green;
+font-size:11px;
+margin-left:6px;
+}
+
+.input-area{
 display:flex;
 padding:10px;
-background:#fff;
+background:white;
+border-top:1px solid #ddd;
 }
+
 input{
 flex:1;
 padding:8px;
-border:1px solid #ccc;
 border-radius:20px;
+border:1px solid #ccc;
 }
+
 button{
 padding:8px 15px;
-margin-left:5px;
 border:none;
-background:#ff4da6;
-color:#fff;
+background:#ff4d6d;
+color:white;
 border-radius:20px;
+margin-left:5px;
 cursor:pointer;
-}
-.popup{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.6);
-justify-content:center;
-align-items:center;
-}
-.popup-content{
-background:#fff;
-padding:20px;
-border-radius:10px;
-text-align:center;
-width:80%;
-max-width:300px;
-}
-.popup-content button{
-width:100%;
-margin-top:10px;
 }
 </style>
 </head>
 <body>
 
 <div class="header">
-<span>Women Social Chat Community</span>
-<span class="menu" onclick="toggleMenu()">⋮</span>
+<div class="brand">Women Social Chat Community</div>
+<div class="menu">⋮</div>
 </div>
 
-<div class="dropdown" id="dropdown">
-<div onclick="showPopup()">Create Account</div>
-<div>Secure Chat</div>
-<div>Private Community</div>
-</div>
+<div class="chat-box" id="chatBox"></div>
 
-<div class="chat-box" id="chat"></div>
-
-<div class="input-box">
-<input type="text" id="msgInput" placeholder="Type message...">
-<button onclick="sendMsg()">Send</button>
-</div>
-
-<div class="popup" id="popup">
-<div class="popup-content">
-<h3>Create Free Account</h3>
-<p>Join to continue chatting</p>
-<button onclick="closePopup()">Back</button>
-</div>
+<div class="input-area">
+<input type="text" id="userInput" placeholder="Type a message...">
+<button onclick="sendMessage()">Send</button>
 </div>
 
 <script>
-const femaleNames = [
-"Emma","Olivia","Ava","Sophia","Isabella","Mia","Charlotte","Amelia","Harper","Evelyn",
-"Abigail","Emily","Ella","Elizabeth","Camila","Luna","Sofia","Avery","Mila","Aria",
-"Scarlett","Penelope","Layla","Chloe","Victoria","Madison","Eleanor","Grace","Nora","Riley",
-"Zoey","Hannah","Hazel","Lily","Ellie","Violet","Lillian","Zoe","Stella","Aurora",
-"Natalie","Emilia","Everly","Leah","Aubrey","Willow","Addison","Lucy","Audrey","Bella",
-"Nova","Brooklyn","Paisley","Savannah","Claire","Skylar","Isla","Genesis","Naomi","Elena",
-"Caroline","Eliana","Anna","Valentina","Ruby","Kennedy","Ivy","Ariana","Aaliyah","Cora",
-"Madelyn","Alice","Kinsley","Hailey","Gabriella","Allison","Gianna","Serenity","Samantha","Sarah",
-"Autumn","Quinn","Eva","Piper","Sophie","Sadie","Delilah","Josephine","Nevaeh","Adeline",
-"Arya","Emery","Lydia","Clara","Vivian","Madeline","Peyton","Julia","Rylee","Brielle"
+
+// 100 European & American Names
+const names = [
+"Emma","Olivia","Sophia","Isabella","Charlotte","Amelia","Mia","Harper","Evelyn","Abigail",
+"Emily","Elizabeth","Sofia","Avery","Ella","Scarlett","Grace","Chloe","Victoria","Riley",
+"Lily","Aria","Zoey","Nora","Hannah","Luna","Layla","Aurora","Penelope","Savannah",
+"Brooklyn","Bella","Claire","Skylar","Lucy","Paisley","Everly","Anna","Caroline","Nova",
+"Madison","Hailey","Aubrey","Kinsley","Stella","Maya","Elena","Leah","Sarah","Violet",
+"Audrey","Hazel","Genesis","Adeline","Eliza","Samantha","Allison","Willow","Lucy","Naomi",
+"Eliana","Juliana","Gabriella","Valentina","Lydia","Madelyn","Julia","Delilah","Ariana","Kaylee",
+"Camila","Natalie","Ivy","Sadie","Piper","Ruby","Serenity","Autumn","Nevaeh","Cora",
+"Alice","Hailey","Quinn","Aaliyah","Kennedy","Sarah","Eva","Emilia","Clara","Vivian",
+"Reagan","Madeline","Josephine","Brielle","Arya","Lilah","Melanie","Jade","Maria","Athena"
 ];
 
+let profiles=[];
+for(let i=0;i<100;i++){
+profiles.push({
+name:names[i],
+img:`https://randomuser.me/api/portraits/women/${i%99}.jpg`
+});
+}
+
+// 100 Connected Message Pool
 const messagePool = [
-"Hi Emma! Where are you from?","I'm from New York 😊 What about you?",
-"Oh nice! I'm from London.","London is beautiful! Have you visited Paris?",
-"Yes! Paris was amazing last summer.","I always wanted to go there.",
-"You should! The cafes are lovely.","I love coffee talks with friends ☕",
-"Same here! Especially on rainy days.","Rainy days feel romantic sometimes.",
-"Do you like traveling solo?","Sometimes, but I prefer going with friends.",
-"True! Traveling with friends is more fun.","Have you ever visited Italy?",
-"Yes! Rome was unforgettable.","I love Italian food so much!",
-"Pizza and pasta are my favorites.","Same here 😂",
-"Do you enjoy beach vacations?","Yes, especially in Spain!",
-"Spain beaches are stunning.","I love sunset views there.",
-"Sunsets make me feel peaceful.","Me too, especially by the ocean.",
-"Do you enjoy reading books?","Yes! Romantic novels mostly.",
-"I love those too!","Who is your favorite author?",
-"I like Jane Austen classics.","Classic love stories are timeless.",
-"Absolutely agree!","Do you believe in true love?",
-"Yes, but it needs trust.","Trust is everything in a relationship.",
-"Exactly! Without trust nothing works.","Are you married?",
-"No, but someday maybe 😊","I hope you find someone kind.",
-"Thank you! That means a lot.","Friendship like this is special.",
-"Yes, I enjoy chatting here.","Same here, feels positive.",
-"What do you do for fun?","I like painting and music.",
-"Wow that's creative!","What about you?",
-"I enjoy photography.","That's amazing!",
-"Have you traveled recently?","Yes, I visited California.",
-"I love California beaches!","They are breathtaking.",
-"Do you like hiking?","Yes in the mountains.",
-"I prefer beach over mountains.","Both are nice in different ways.",
-"True!","Do you enjoy cooking?",
-"Yes, Italian dishes mostly.","Sounds delicious!",
-"What’s your favorite dessert?","Cheesecake 😍",
-"I love chocolate cake!","Chocolate is life 😂",
-"Absolutely!","Do you have siblings?",
-"Yes, one sister.","I have two brothers.",
-"Family time is important.","Very important.",
-"What’s your dream destination?","Switzerland!",
-"Oh snowy mountains!","Yes I love snow.",
-"I prefer warm weather.","Warm beaches are perfect.",
-"True!","Do you like long drives?",
-"Yes at night.","Night drives feel peaceful.",
-"With good music.","Exactly!",
-"What music do you like?","Soft pop.",
-"I enjoy jazz.","Nice choice!",
-"Music connects people.","Yes it does.",
-"Do you believe in destiny?","Sometimes I do.",
-"I believe hard work matters more.","True as well.",
-"Life is a mix of both.","Agreed.",
-"I'm glad we connected here.","Me too!",
-"This chat feels nice.","Yes, positive vibes only.",
-"Let’s stay friends.","Of course!",
-"Good night everyone 🌙","Good night! Talk tomorrow 😊"
+"Hi Emma! Where are you from?",
+"I'm from New York 😊 What about you?",
+"Oh nice! I'm from London.",
+"London is beautiful! Have you visited Paris?",
+"Yes! Paris was amazing last summer.",
+"I always wanted to go there.",
+"You should! The cafes are lovely.",
+"I love coffee talks with friends ☕",
+"Same here! Especially on rainy days.",
+"Rainy days feel romantic sometimes.",
+"Do you like traveling solo?",
+"Sometimes, but I prefer going with friends.",
+"True! Traveling with friends is more fun.",
+"Have you ever visited Italy?",
+"Yes! Rome was unforgettable.",
+"I love Italian food so much!",
+"Pizza and pasta are my favorites.",
+"Same here 😂",
+"Do you enjoy beach vacations?",
+"Yes, especially in Spain!",
+"Spain beaches are stunning.",
+"I love sunset views there.",
+"Sunsets make me feel peaceful.",
+"Me too, especially by the ocean.",
+"Do you enjoy reading books?",
+"Yes! Romantic novels mostly.",
+"I love those too!",
+"Who is your favorite author?",
+"I like Jane Austen classics.",
+"Classic love stories are timeless.",
+"Absolutely agree!",
+"Do you believe in true love?",
+"Yes, but it needs trust.",
+"Trust is everything in a relationship.",
+"Exactly! Without trust nothing works.",
+"Are you married?",
+"No, but someday maybe 😊",
+"I hope you find someone kind.",
+"Thank you! That means a lot.",
+"Friendship like this is special.",
+"Yes, I enjoy chatting here.",
+"Same here, feels positive.",
+"What do you do for fun?",
+"I like painting and music.",
+"Wow that's creative!",
+"What about you?",
+"I enjoy photography.",
+"That's amazing!",
+"Have you traveled recently?",
+"Yes, I visited California.",
+"I love California beaches!",
+"They are breathtaking.",
+"Do you like hiking?",
+"Yes in the mountains.",
+"I prefer beach over mountains.",
+"Both are nice in different ways.",
+"True!",
+"Do you enjoy cooking?",
+"Yes, Italian dishes mostly.",
+"Sounds delicious!",
+"What’s your favorite dessert?",
+"Cheesecake 😍",
+"I love chocolate cake!",
+"Chocolate is life 😂",
+"Absolutely!",
+"Do you have siblings?",
+"Yes, one sister.",
+"I have two brothers.",
+"Family time is important.",
+"Very important.",
+"What’s your dream destination?",
+"Switzerland!",
+"Oh snowy mountains!",
+"Yes I love snow.",
+"I prefer warm weather.",
+"Warm beaches are perfect.",
+"True!",
+"Do you like long drives?",
+"Yes at night.",
+"Night drives feel peaceful.",
+"With good music.",
+"Exactly!",
+"What music do you like?",
+"Soft pop.",
+"I enjoy jazz.",
+"Nice choice!",
+"Music connects people.",
+"Yes it does.",
+"Do you believe in destiny?",
+"Sometimes I do.",
+"I believe hard work matters more.",
+"True as well.",
+"Life is a mix of both.",
+"Agreed.",
+"I'm glad we connected here.",
+"Me too!",
+"This chat feels nice.",
+"Yes, positive vibes only.",
+"Let’s stay friends.",
+"Of course!",
+"Good night everyone 🌙",
+"Good night! Talk tomorrow 😊"
 ];
 
-let chat=document.getElementById("chat");
-let index=0;
-let userMsgCount=0;
+let msgIndex=0;
 
-function addMsg(text,side){
-let div=document.createElement("div");
-div.className="msg "+side;
-div.innerText=text;
-chat.appendChild(div);
-chat.scrollTop=chat.scrollHeight;
+function addMessage(profile,text){
+const chatBox=document.getElementById("chatBox");
+const msg=document.createElement("div");
+msg.className="message";
+msg.innerHTML=`
+<img src="${profile.img}">
+<div>
+<div class="name">${profile.name} <span class="online">● Online</span></div>
+<div class="bubble">${text}</div>
+</div>
+`;
+chatBox.appendChild(msg);
+chatBox.scrollTop=chatBox.scrollHeight;
 }
 
-function autoMsg(){
-let name=femaleNames[Math.floor(Math.random()*femaleNames.length)];
-addMsg(name+": "+messagePool[index],"left");
-index++;
-if(index>=100){index=0;}
+function autoReply(){
+addMessage(profiles[msgIndex%100],messagePool[msgIndex]);
+msgIndex++;
+if(msgIndex>=100){msgIndex=0;}
 }
 
-for(let i=0;i<50;i++){autoMsg();}
-
-setInterval(autoMsg,2000);
-
-function sendMsg(){
-let input=document.getElementById("msgInput");
-if(!input.value.trim())return;
-
-if(userMsgCount>=3){
-showPopup();
-return;
-}
-
-addMsg("You: "+input.value,"right");
+function sendMessage(){
+const input=document.getElementById("userInput");
+if(input.value.trim()!==""){
+addMessage({name:"Guest",img:"https://randomuser.me/api/portraits/lego/1.jpg"},input.value);
 input.value="";
-userMsgCount++;
+}
 }
 
-function showPopup(){
-document.getElementById("popup").style.display="flex";
+// preload first 100
+for(let i=0;i<100;i++){
+autoReply();
 }
 
-function closePopup(){
-document.getElementById("popup").style.display="none";
-}
+setInterval(autoReply,3000);
 
-function toggleMenu(){
-let d=document.getElementById("dropdown");
-d.style.display=d.style.display==="block"?"none":"block";
-}
 </script>
 
 </body>
