@@ -1,260 +1,226 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Free Online Women Chat Room | Private & Group Chat</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>প্রিমিয়াম হারবাল ঔষধx(DEMO)x</title>
 
-<!-- Facebook Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0].parentNode.insertBefore(t,s)
-}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', 'YOUR_PIXEL_ID'); 
-fbq('track', 'PageView');
-</script>
-<noscript>
-<img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/>
-</noscript>
+<meta name="description" content="Join our free online women chat room for group and private conversations. Safe, friendly and real-time messaging platform.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://yourdomain.com">
 
 <style>
-body {margin:0;font-family:Arial,Helvetica,sans-serif;background:#f0f8f5;color:#222;line-height:1.6;}
-.wrapper {max-width:900px;margin:auto;background:white;padding-bottom:50px;}
-.header {background:#2e7d32;color:white;text-align:center;padding:40px 20px; position: relative;}
-.header img.logo {width:100px; height:100px; border-radius:50%; object-fit:cover; display:block; margin:0 auto 20px;}
-.header h1 {font-size:36px;font-weight:bold;margin:0;}
-.section {padding:40px 20px;}
-.slider {position:relative;width:100%;height:400px;overflow:hidden;margin-bottom:30px;}
-.slide {position:absolute;width:100%;height:100%;opacity:0;transition:opacity 1s ease-in-out;}
-.slide img {width:100%;height:100%;object-fit:cover;border-radius:10px;}
-.active {opacity:1;}
-.price-box {background:#e8f5e9;border:2px dashed #2e7d32;padding:25px;text-align:center;margin:20px 0;border-radius:10px;}
-.old-price {text-decoration:line-through;color:gray;font-size:20px;}
-.new-price {color:#1b5e20;font-size:28px;font-weight:bold;margin-top:10px;}
-
-/* All Buttons Live Animation */
-.btn, button {
-display:block;
-width:60%;
-margin:20px auto;
-background:#2e7d32;
-color:white;
-text-align:center;
-padding:20px;
-font-size:22px;
-text-decoration:none;
-border-radius:12px;
-position:relative;
-cursor:pointer;
-transition: all 0.3s ease;
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0b141a;
+  color:white;
 }
-.btn:hover, button:hover {
-transform: translateY(-5px) scale(1.08) rotate(-1deg);
-box-shadow:0 10px 25px rgba(0,0,0,0.4);
-background:#66bb6a;
+.header{
+  height:60px;
+  background:#202c33;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:100;
 }
-
-.features li {margin:12px 0;font-size:18px;}
-.product-section {margin-bottom:50px;}
-.product-section img {width:100%;border-radius:10px;margin-bottom:15px;}
-.product-section h3 {font-size:24px;margin-bottom:10px;}
-.product-section p {font-size:16px;}
-.video-section iframe {width:100%;height:450px;border:none;border-radius:10px;margin-bottom:40px;}
-.order-box {background:#e8f5e9;padding:40px 20px;border:1px solid #a5d6a7;border-radius:10px;margin-top:50px;}
-input, select, textarea {width:100%;padding:15px;margin:10px 0;border:1px solid #ccc;border-radius:8px;font-size:16px;}
-.footer {background:#1b5e20;color:white;text-align:center;padding:25px;font-size:14px;}
-.success-message {display:none;background:#d4edda;color:#155724;padding:15px;margin-top:10px;border-radius:5px;font-size:16px;}
-
-/* FLOATING BUTTONS */
-.float-buttons{
-position:fixed;
-bottom:25px;
-right:25px;
-display:flex;
-flex-direction:column;
-gap:15px;
-z-index:999;
+.seoSection{
+  padding:90px 20px 30px 20px;
+  max-width:900px;
+  margin:auto;
 }
-.float-buttons a{
-width:50px;
-height:50px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#25d366;
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
-transition:transform 0.3s ease;
+.seoSection h1{color:#25d366;}
+.seoSection h2{margin-top:25px;color:#53bdeb;}
+.messages{
+  height:400px;
+  overflow-y:auto;
+  padding:10px;
+  background:#111b21;
 }
-.float-buttons a.messenger{
-background:#0084ff;
+.inputBox{
+  display:flex;
+  padding:10px;
+  background:#202c33;
 }
-.float-buttons a img{
-width:24px;
-height:24px;
+.inputBox input{
+  flex:1;
+  padding:10px;
+  border-radius:20px;
+  border:none;
 }
-.float-buttons a:hover{
-transform:scale(1.3) rotate(-10deg);
-box-shadow:0 10px 25px rgba(0,0,0,0.3);
+.inputBox button{
+  margin-left:5px;
+  padding:10px 15px;
+  border:none;
+  border-radius:20px;
+  background:#25d366;
+  color:white;
+  cursor:pointer;
 }
-
-/* Footer GreenLine It */
-.footer a.greenline{
-color:#00ff00;
-text-decoration:none;
-font-weight:bold;
+.msg{
+  display:flex;
+  margin-bottom:10px;
 }
-.footer a.greenline:hover{
-text-decoration:underline;
+.msg img{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  margin-right:8px;
+}
+.bubble{
+  background:#202c33;
+  padding:8px 12px;
+  border-radius:12px;
+  max-width:75%;
+}
+.me{justify-content:flex-end;}
+.me .bubble{background:#005c4b;}
+.name{font-size:12px;color:#53bdeb;}
+.ctaBox{
+  text-align:center;
+  padding:30px;
+}
+.ctaBtn{
+  padding:12px 25px;
+  background:red;
+  color:white;
+  border-radius:5px;
+  text-decoration:none;
+  font-weight:bold;
+}
+footer{
+  text-align:center;
+  padding:20px;
+  font-size:13px;
+  opacity:.7;
 }
 </style>
 </head>
+
 <body>
 
-<div class="wrapper">
+<div class="header">🔥 Free Women Chat Room</div>
 
-<!-- Header / Hero -->
-<div class="header">
-<img class="logo" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3BjQb2Q-2iQXBg86pBa-gfxE3Lq6wT6U4t3guOO2dY63J2kJFEd2GmZCLAnbPRI7w1unZQH55sPtqhEoq1lAmL4pqlB5ouKr4DdgLPlj7ojkbDT4AQ74fuMQIxE4EwM2S_YhYyYx5Xd-VMO9Td7hQo9geI8825LPgDSKPJkFkBDJEcG0-1tikKEPicQs/s1920/InShot_20260221_161102127.jpg" alt="কোম্পানি লোগো">
-<h1>প্রিমিয়াম হারবাল ঔষধ – স্বাস্থ্য ও শক্তি বৃদ্x(DEMO)xধি</h1>
-</div>
+<!-- SEO CONTENT -->
+<section class="seoSection">
+<h1>Free Online Women Chat Room</h1>
 
-<!-- Hero Slider -->
-<div class="slider">
-    <div class="slide active"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZBFmVAUip3sihRJys_kIleBo9lSTD2OCNoJx1pUpMEzsLORuDoM0CS8Ekn11Wa-1R5X603Ngcs_hbyKRinDqp5l9nZzMmMnnctlGm1AZ__bW30UG-65yYXARDD3uLeBqm7um8iTF8b_f17DympKuaSN2OkntpUCeKtcdefSlYadHjhHSzTY4NhJW7VMk/s1920/InShot_20260221_161141420.jpg" alt="Herbal Product 1"></div>
-    <div class="slide"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhaXNeOdEhrLUUE4mzyuQS0hzRS6snd0_7ZOwAf90gFGIzGOaM0Sm-AGNvM2JlJuZ5_OFPFlkP3ZIxqGuWIHsvqbTuzLTNNc2YCSSIGtaxxQz8f6ynETp4jlZl-LXNlzRTzDSsZtTAiTHnUGyoJ9aDBny2gojAZITMKMaI2_9gHRQm1MHwAyQulygtC6JU/s1920/InShot_20260221_161210537.jpg" alt="Herbal Product 2"></div>
-    <div class="slide"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9RJHAGjrBqdus3lFh6V1q-W8NjXnoVXdNWtT-zOyZACjcIRq86o_RctBQV7iOJQO5WGLQmks7sIS4g0sRlUvpFkDD4tWXE5pN1GCHMDWcgoWVwX-ctNxGjgkHgQV2vYyrDtrZEP9_bA7yiSKH-Qe9wrqeFtzNs8ixeQEIwov0h2UUDB32pU4jXI8BPIM/s1920/InShot_20260221_161255642.jpg" alt="Herbal Product 3"></div>
-</div>
+<p>
+Welcome to our free online women chat platform where users can join group discussions
+and start private conversations in a friendly digital environment. Our community is
+designed for respectful communication, real-time interaction and meaningful connections.
+</p>
 
-<!-- Price Section -->
-<div class="section price-box">
-<p class="old-price">আগের মূল্য: ৳ ৯৫০ / ৫০ প্যাকেট</p>
-<p class="new-price">অফার মূল্য: ৳ ৭৯০ / ৫০ প্যাকেট</p>
-<a href="#order" class="btn">এখনই অর্ডার করুন</a>
-</div>
-
-<!-- Features Section -->
-<div class="section">
-<h2 style="font-size:30px; margin-bottom:20px;">কেন আমাদের হারবাল ঔষধ কিনবেনx(DEMO)x:</h2>
-<ul class="features">
-<li>১০০% প্রাকৃতিক এবং কোবিরাজি ঘরে তৈরিx(DEMO)x</li>
-<li>কোন কৃত্রিম উপাদান নেইx(DEMO)x</li>
-<li>স্বাস্থ্য ও রোগ প্রতিরোধ ক্ষমতা বৃদ্ধি করx(DEMO)xে</li>
-<li>ডেলিভারি সরাসরি বাড়ি পর্যন্তx(DEMO)xx(DEMO)x</li>
-<li>বিশ্বস্ত এবং প্রমাণিত মানেরx(DEMO)x</li>
+<h2>Why Join Our Chat Community?</h2>
+<ul>
+<li>Real-time group chat</li>
+<li>Private messaging feature</li>
+<li>Simple and mobile-friendly design</li>
+<li>Safe and moderated environment</li>
 </ul>
-<a href="#order" class="btn">অর্ডার করুন</a>
+
+<h2>Is This Chat Room Free?</h2>
+<p>
+Yes. You can join and start chatting instantly. Some advanced features may require
+registration for security and community protection.
+</p>
+</section>
+
+<!-- CHAT UI -->
+<div class="messages" id="groupMessages"></div>
+
+<div class="inputBox">
+<input id="groupInput" placeholder="Type message...">
+<button onclick="sendGroup()">Send</button>
 </div>
 
-<!-- Product Images + Details -->
-<div class="section">
-<div class="product-section">
-<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9RJHAGjrBqdus3lFh6V1q-W8NjXnoVXdNWtT-zOyZACjcIRq86o_RctBQV7iOJQO5WGLQmks7sIS4g0sRlUvpFkDD4tWXE5pN1GCHMDWcgoWVwX-ctNxGjgkHgQV2vYyrDtrZEP9_bA7yiSKH-Qe9wrqeFtzNs8ixeQEIwov0h2UUDB32pU4jXI8BPIM/s1920/InShot_20260221_161255642.jpg" alt="Herbal Product 1">
-<h3>কোবিরাজি হারবাল প্যাক</h3>
-<p>প্রাকৃতিক উপাদানে তৈরি, প্রতিদিনের স্বাস্থ্যের জন্য উপযুক্ত।x(DEMO)x</p>
-<a href="#order" class="btn">অর্ডার করুন</a>
+<div class="ctaBox">
+<p>Create a free account to unlock full private messaging features.</p>
+<a href="#" class="ctaBtn">Create Free Account</a>
 </div>
 
-<div class="product-section">
-<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9RJHAGjrBqdus3lFh6V1q-W8NjXnoVXdNWtT-zOyZACjcIRq86o_RctBQV7iOJQO5WGLQmks7sIS4g0sRlUvpFkDD4tWXE5pN1GCHMDWcgoWVwX-ctNxGjgkHgQV2vYyrDtrZEP9_bA7yiSKH-Qe9wrqeFtzNs8ixeQEIwov0h2UUDB32pU4jXI8BPIM/s1920/InShot_20260221_161255642.jpg" alt="Herbal Product 2">
-<h3>ডিটক্স হারবাল প্যাক</h3>
-<p>দেহের ক্ষতিকর টক্সিন দূর করে, স্বাভাবিক শক্তি বৃদ্ধি করেx(DEMO)x।</p>
-<a href="#order" class="btn">অর্ডার করুন</a>
-</div>
-
-<div class="product-section">
-<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDzJmS7esY2axL-C6aiKFVU0pbUyAyTtskT6xYVrwH7vOL_TmLW_weM4-7PnEnFgGJLiMtqFe4_41MX66EG-o5WUMAFzFKR51loSVlAPTwo5hxIQgHeZBlGocwpBVkGv0jfeYmDJHgnApZyl9_OHljxKw9LrCIdqkzV9AMnKmtwFZcgyg1x8uAXfJXfSc/s1920/InShot_20260221_161236476.jpg" alt="Herbal Product 3">
-<h3>স্ট্রেস রিলিফ হারবাল প্যাক</h3>
-<p>মানসিক চাপ কমায় এবং দেহের স্বাভাবিক ব্যালেন্স বজায় রাখেx(DEMO)x।</p>
-<a href="#order" class="btn">অর্ডার করুন</a>
-</div>
-</div>
-
-<!-- Video Section -->
-<div class="section video-section">
-<h2 style="font-size:28px; margin-bottom:20px;">পণ্যের ভিডিও ডিটেইলসx(DEMO)x</h2>
-<iframe src="https://www.youtube.com/embed/qV-iQLGW-kY" allowfullscreen></iframe>
-<a href="#order" class="btn">এখনই অর্ডার করুন</a>
-</div>
-
-<!-- Order Form -->
-<div class="section order-box" id="order">
-<h2 style="font-size:28px; margin-bottom:20px;">অর্ডার ফর্ম</h2>
-
-<form id="orderForm">
-<input type="text" name="name" placeholder="আপনার নাম লিখুন" required>
-<input type="tel" name="phone" placeholder="মোবাইল নম্বর" required>
-<input type="text" name="address" placeholder="সম্পূর্ণ ঠিকানা" required>
-
-<select name="package" required>
-<option value="">প্যাকেজ নির্বাচন করুন</option>
-<option>১ প্যাক - ৳৭৯০ / ৫০ প্যাকেট</option>
-<option>২ প্যাক - ৳১৫০০ / ১০০ প্যাকেট</option>
-</select>
-
-<button type="submit">অর্ডার কনফার্ম করুন</button>
-</form>
-
-<div class="success-message" id="successMsg">
-ধন্যবাদ! আপনার অর্ডার সফলভাবে সাবমিট হয়েছে।২৪ ঘন্টার মধ্যে আমাদের সাপোর্ট প্রতিনিধি আপনার সাথে যোগাযোগ করবে, আপনাকে অসংখ্য ধন্যবাদ অর্ডার করার জন্য ✅
-</div>
-</div>
-
-<div class="footer">
-© ২০২৬ প্রিমিয়াম হারবাল ঔষধ | সর্বস্বত্ব সংরক্ষিতx(DEMO)x | Design By <a href="https://www.greenlineit.com" target="_blank" class="greenline">GreenLine It</a>
-</div>
-
-</div>
-
-<!-- FLOATING WHATSAPP & MESSENGER BUTTONS -->
-<div class="float-buttons">
-<a href="YOUR_WHATSAPP_LINK_HERE" target="_blank">
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-</a>
-<a href="YOUR_MESSENGER_LINK_HERE" class="messenger" target="_blank">
-<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh8riD6IZjR24jLMYlWyin3OPOTgxKaeT8siEuSI53h84XtSC6fBImvDlBYw0H2K0sA84CH2y_1D0B6Jr1ot9o-SZsRWKdeoX0A5KDqELgdSyCOQKZdPYqkhBltAccsl789SkoS69TDe7X5JwBZa9vnid6MpMXpH9l4V1WC8uDOMQ1naBF4dfq0MJn_ukU/s960/Facebook_Messenger_logo_2020.svg.png" alt="Messenger">
-</a>
-</div>
+<footer>
+© 2026 Women Chat Community | Privacy Policy | Terms of Service
+</footer>
 
 <script>
-// Hero Slider
-let slides = document.querySelectorAll(".slide");
-let index = 0;
-setInterval(() => {
-slides[index].classList.remove("active");
-index = (index + 1) % slides.length;
-slides[index].classList.add("active");
-}, 4000);
 
-// Form Submit to Google Sheet
-document.getElementById("orderForm").addEventListener("submit", async function(e){
-e.preventDefault();
-const formData = new FormData(this);
-const params = new URLSearchParams();
-formData.forEach((v,k)=>{params.append(k,v);});
+const TOTAL_PROFILES=50;
+let names=[],profiles={};
 
-try{
-const res = await fetch("https://script.google.com/macros/s/AKfycbxT7TaT6_MXlfZ5Oi5PyxrELfLUARs-hHBDM5Kha-zirbOKIYNf7bB_qxzUued6oQUq/exec",{
-method:"POST",
-body: params
-});
-if(res.ok){
-document.getElementById("successMsg").style.display="block";
-this.reset();
-fbq('track', 'Lead');
-}else{
-alert("সাবমিট করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+for(let i=1;i<=TOTAL_PROFILES;i++){
+  let name="User"+(1000+i);
+  names.push(name);
+  profiles[name]={
+    img:`https://randomuser.me/api/portraits/women/${i%90}.jpg`
+  };
 }
-}catch(err){
-alert("সাবমিট করতে সমস্যা হয়েছে।");
+
+const groupPool=[
+"Hello everyone!",
+"Nice to meet you all.",
+"I enjoy friendly conversations.",
+"Anyone here from my area?",
+"Let's talk and connect.",
+"I like positive discussions.",
+"How is everyone today?",
+"Looking for good conversation.",
+"Nice community here!",
+"Happy to join this chat."
+];
+
+let groupIndex=0;
+
+/* LOAD INITIAL MESSAGES */
+for(let i=0;i<10;i++){
+  let randomName=names[Math.floor(Math.random()*names.length)];
+  addGroup(randomName,groupPool[i]);
 }
-});
+
+/* SLOW AUTO MESSAGE (8 sec) */
+setInterval(()=>{
+  let randomName=names[Math.floor(Math.random()*names.length)];
+  addGroup(randomName,groupPool[groupIndex % groupPool.length]);
+  groupIndex++;
+},8000);
+
+function addGroup(name,text){
+  let box=document.getElementById("groupMessages");
+  box.insertAdjacentHTML("beforeend",`
+    <div class="msg">
+      <img src="${profiles[name].img}">
+      <div class="bubble">
+        <div class="name">${name}</div>
+        ${text}
+      </div>
+    </div>
+  `);
+  box.scrollTop=box.scrollHeight;
+}
+
+function sendGroup(){
+  let input=document.getElementById("groupInput");
+  if(!input.value.trim()) return;
+
+  let box=document.getElementById("groupMessages");
+
+  box.insertAdjacentHTML("beforeend",`
+    <div class="msg me">
+      <div class="bubble">
+        <div class="name">You</div>
+        ${input.value}
+      </div>
+    </div>
+  `);
+
+  input.value="";
+  box.scrollTop=box.scrollHeight;
+}
+
 </script>
 
 </body>
