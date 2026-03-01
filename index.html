@@ -38,7 +38,7 @@ background:white;
 width:180px;
 box-shadow:0 4px 10px rgba(0,0,0,0.2);
 border-radius:8px;
-z-index:10;
+z-index:100;
 }
 
 .dropdown div{
@@ -117,7 +117,7 @@ background:rgba(0,0,0,0.6);
 display:none;
 justify-content:center;
 align-items:center;
-z-index:20;
+z-index:200;
 }
 
 .popup-content{
@@ -179,7 +179,17 @@ text-align:center;
 
 <script>
 
-// 100 Names
+function toggleMenu(){
+const dropdown=document.getElementById("dropdown");
+dropdown.style.display = dropdown.style.display==="block" ? "none" : "block";
+}
+
+window.addEventListener("click",function(e){
+if(!e.target.closest(".menu") && !e.target.closest(".dropdown")){
+document.getElementById("dropdown").style.display="none";
+}
+});
+
 const names=[
 "Emma","Olivia","Sophia","Isabella","Charlotte","Amelia","Mia","Harper","Evelyn","Abigail",
 "Emily","Elizabeth","Sofia","Avery","Ella","Scarlett","Grace","Chloe","Victoria","Riley",
@@ -201,7 +211,6 @@ img:`https://randomuser.me/api/portraits/women/${i%99}.jpg`
 });
 }
 
-// FULL 100 MESSAGE POOL
 const messagePool=[
 "Hi Emma! Where are you from?","I'm from New York 😊 What about you?",
 "Oh nice! I'm from London.","London is beautiful! Have you visited Paris?",
@@ -292,11 +301,6 @@ addMessage({name:"Guest",img:"https://randomuser.me/api/portraits/lego/1.jpg"},i
 input.value="";
 userCount++;
 }
-}
-
-function toggleMenu(){
-let d=document.getElementById("dropdown");
-d.style.display=d.style.display==="block"?"none":"block";
 }
 
 function showPopup(){
